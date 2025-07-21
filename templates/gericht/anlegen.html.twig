@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br>
+<div class="container">
+
+{{ form_start(anlegenForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
+    {{ form_widget(anlegenForm) }}
+{{ form_end(anlegenForm) }}
+
+</div>
+{% endblock %}
