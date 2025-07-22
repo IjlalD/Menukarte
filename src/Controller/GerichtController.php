@@ -62,11 +62,13 @@ class GerichtController extends AbstractController
     }
 
     #[Route('/entfernen/{id}', name: 'entfernen')]
-    public function entfernen($id, GerichtRepository $gr, ManagerRegistry $doctrine): Response
+    public function entfernen(int $id, GerichtRepository $gr, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
         $gericht = $gr->find($id);
-        $em->remove($gericht);
+        if ($gericht !== null) {
+            $em->remove($gericht);;
+        }
         $em->flush();
 
         // messege

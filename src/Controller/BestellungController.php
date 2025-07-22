@@ -46,10 +46,14 @@ class BestellungController extends AbstractController
     }
 
     #[Route('/status/{id},{status}', name: 'status')]
-    public function status($id, $status, ManagerRegistry $doctrine): Response
+    public function status(int $id, string $status, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
         $bestellung = $em->getRepository(Bestellung::class)->find($id);
+
+        if (!$bestellung) {
+            throw $this->createNotFoundException('Bestellung nicht gefunden');
+        }
 
         $bestellung->setStatus($status);
         $em->flush();
@@ -62,7 +66,9 @@ class BestellungController extends AbstractController
     {
         $em = $doctrine->getManager();
         $bestellung = $br->find($id);
-        $em->remove($bestellung);
+        if ($bestellung !== null) {
+            $em->remove($bestellung);
+        }
         $em->flush();
 
         return $this->redirect($this->generateUrl('bestellung'));
