@@ -21,28 +21,28 @@ class KategorieRepository extends ServiceEntityRepository
         parent::__construct($registry, Kategorie::class);
     }
 
-//    /**
-//     * @return Kategorie[] Returns an array of Kategorie objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('k')
-//            ->andWhere('k.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('k.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Kategorie[] Returns an array of Kategorie objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('k')
+    //            ->andWhere('k.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('k.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Kategorie
-//    {
-//        return $this->createQueryBuilder('k')
-//            ->andWhere('k.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Kategorie
+    //    {
+    //        return $this->createQueryBuilder('k')
+    //            ->andWhere('k.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

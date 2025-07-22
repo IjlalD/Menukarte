@@ -5,10 +5,10 @@ namespace App\Controller;
 use App\Entity\Bestellung;
 use App\Entity\Gericht;
 use App\Repository\BestellungRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Persistence\ManagerRegistry;
 
 class BestellungController extends AbstractController
 {
@@ -18,35 +18,36 @@ class BestellungController extends AbstractController
         $bestellung = $bestellungRepository->findBy(
             ['tisch' => 'tisch1']
         );
+
         return $this->render('bestellung/index.html.twig', [
-            'bestellungen' => $bestellung
+            'bestellungen' => $bestellung,
         ]);
     }
 
     #[Route('/bestellen/{id}', name: 'bestellen')]
-    public function bestellen(Gericht $gericht, ManagerRegistry $doctrine){
+    public function bestellen(Gericht $gericht, ManagerRegistry $doctrine): Response
+    {
         $bestellung = new Bestellung();
-        $bestellung->setTisch("tisch1");
+        $bestellung->setTisch('tisch1');
         $bestellung->setName($gericht->getName());
         $bestellung->setBnummer($gericht->getId());
         $bestellung->setPreis($gericht->getPreis());
-        $bestellung->setStatus("offen");
+        $bestellung->setStatus('offen');
 
-        //EntityManager
+        // EntityManager
         $em = $doctrine->getManager();
 
         $em->persist($bestellung);
         $em->flush();
 
-        $this->addFlash('bestell', $bestellung->getName(). ' wurde zur Bestellung hinzugefügt');
+        $this->addFlash('bestell', $bestellung->getName().' wurde zur Bestellung hinzugefügt');
 
         return $this->redirect($this->generateUrl('menu'));
-
     }
 
     #[Route('/status/{id},{status}', name: 'status')]
-    public function status($id, $status, ManagerRegistry $doctrine){
-
+    public function status($id, $status, ManagerRegistry $doctrine): Response
+    {
         $em = $doctrine->getManager();
         $bestellung = $em->getRepository(Bestellung::class)->find($id);
 
@@ -54,10 +55,9 @@ class BestellungController extends AbstractController
         $em->flush();
 
         return $this->redirect($this->generateUrl('bestellung'));
-
     }
 
-        #[Route('/loeschen/{id}', name: 'loeschen')]
+    #[Route('/loeschen/{id}', name: 'loeschen')]
     public function entfernen($id, BestellungRepository $br, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
@@ -67,5 +67,4 @@ class BestellungController extends AbstractController
 
         return $this->redirect($this->generateUrl('bestellung'));
     }
-
 }

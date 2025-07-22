@@ -17,10 +17,10 @@ class GerichtType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('anhang', FileType::class,['mapped' => false])
+            ->add('anhang', FileType::class, ['mapped' => false])
             ->add('beschreibung')
             ->add('kategorie', EntityType::class, [
-                'class' =>Kategorie::class
+                'class' => Kategorie::class,
             ])
             ->add('preis')
             ->add('Speichern', SubmitType::class)

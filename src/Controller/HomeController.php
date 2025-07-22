@@ -21,5 +21,4 @@ class HomeController extends AbstractController
             'gericht2' => $gerichte[$zufall[1]],
         ]);
     }
-
 }

@@ -3,10 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\KategorieRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use App\Entity\Gericht;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: KategorieRepository::class)]
 class Kategorie
@@ -19,7 +18,7 @@ class Kategorie
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: "kategorie", targetEntity: Gericht::class)]
+    #[ORM\OneToMany(mappedBy: 'kategorie', targetEntity: Gericht::class)]
     private Collection $gerichte;
 
     public function __construct()

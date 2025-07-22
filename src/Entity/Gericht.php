@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\GerichtRepository;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Kategorie;
 
 #[ORM\Entity(repositoryClass: GerichtRepository::class)]
 class Gericht
@@ -83,14 +82,14 @@ class Gericht
     }
 
     public function getKategorie(): ?Kategorie
-{
-    return $this->kategorie;
-}
+    {
+        return $this->kategorie;
+    }
 
-public function setKategorie(?Kategorie $kategorie): static
-{
-    $this->kategorie = $kategorie;
+    public function setKategorie(?Kategorie $kategorie): static
+    {
+        $this->kategorie = $kategorie;
 
-    return $this;
-}
+        return $this;
+    }
 }
